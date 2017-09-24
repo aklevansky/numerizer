@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<style>
+		</style>
+		<title>Number Trainer</title>
+		<link href="https://fonts.googleapis.com/css?family=Raleway:700" rel="stylesheet">
+		<link href="./font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<button id="menu-toggle" class='fixedCtrlBtn' data-action="menuToggle" class="btn btn-dark btn-lg"><i class="fa fa-bars"></i></button>
+		<div id="js-numTrainer">
+			<header>
+				<div class="header">
+					<h1>Numerizer</h1>
+				</div>
+					<div class="js-controls text-center" id="js-pageControls">
+						<button type="button" id="js-playBtn" class="js-controls js-playBtn" data-action="play">START</button>
+					</div>
+			</header>
+			<div class='setInfoDisplay'>
+					<div class='setInfo js-inactive' id='setInfo'>
+						<div class="infoBox"><h3>Language:</h3><span id="js-lang-info"></span></div><div class="infoBox"><h3>Voice:</h3><span id="js-voice-info"></span></div><div class="infoBox infoBoxSmall"><h3>Number:</h3><span id="js-number-info"></span></div><div class="infoBox infoBoxSmall"><h3>Rate:</h3><span id="js-rate-info"></span></div><div class="infoBox infoBoxSmall"><h3>Pause:</h3><span id="js-pause-info"></span></div><div class="infobox infoBoxSmall"><h3>Time: </h3><span id="timer">00:00</span></div>
+					</div>
+			</div>
+
+			<div>
+				<div class="controls leftscrollbar">
+					<form name="appForm">
+						<fieldset id="RangeSettings">
+							<legend>Range Settings</legend>
+							<h3 for="min">Minimum value:</h3>
+							<input id="min" class="form-control js-numbers" type="text" name="min" data-min="-100000000" data-max="100000000" value="10000">
+							<h3 for="max">Maximum value:</h3>
+							<input id="max" class="form-control js-numbers" type="text" name="max" data-min="-100000000" data-max="100000000" value="1000000">
+							<h3 for="quantity">How many numbers to generate:</h3>
+							<input id="quantity" class="form-control js-numbers" type="text" name="quantity" data-min="1" data-max="1000" value="10">
+						</fieldset>
+						<fieldset id="VoiceSettings">
+							<legend>Voice Settings</legend>
+<div>
+							<div class="lang">
+								<h3 for="lang">Language:</h3>
+								<select class="js-lang form-control" id="lang" name="lang">
+									<option value="en" selected>Loading</option>
+								</select>
+							</div>
+							<div class="random">
+								<h3 class='checkbox randomMode' for="randomMode">Random: </h3>
+								<input  class="form-check-input checkbox randomMode" id="randomMode" name="randomMode" type="checkbox">
+							</div>
+	</div>						
+							<h3 for="voice">Voice:</h3>
+							<select class="js-voice form-control" id="voice" name="voice">
+								<option value=""></option>
+							</select>
+							<div class="rate">
+								<h3 for="rate">Speaking rate:</h3>
+								<input id="rate" type="range" name="rate" min="1" max="2" value="1" step="0.01">
+							</div>
+							<div class="pause">
+								<h3 for="pause">Pause:</h3>
+								<select class="js-pause form-control" id="pause" name="pause">
+									<option value="0" selected>0 second</option>
+									<option value="1">1 second</option>
+									<option value="2">2 seconds</option>
+									<option value="3">3 seconds</option>
+									<option value="4">4 seconds</option>
+									<option value="5">5 seconds</option>
+								</select>
+							</div>
+							<div id="js-multiple" class="js-invisible">
+								<h3 for="random">Multiple Languages:</h3>
+								<select id="random" class="form-control" id="random" name="random" multiple>
+								</select>
+							</div>
+						</fieldset>
+						<fieldset id="displaySettings">
+							<legend>Display Settings</legend>
+							<h3>Digit Separator: </h3>
+							<label class="radio-inline js-separ"><input  class="form-check-input" id="separatorSpace" name="digitSep" value="&nbsp;" type="radio" checked> Space</label>
+							<label class="radio-inline js-separ"><input  class="form-check-input" id="separatorComma" name="digitSep" value="," type="radio"> Comma</label>
+							<label class="radio-inline js-separ"><input  class="form-check-input" id="separatorPoint" name="digitSep" value="." type="radio"> Point</label>
+							<label class="radio-inline js-separ"><input  class="form-check-input" id="separatorNone" name="digitSep" value="" type="radio"> None</label>
+							<div class="js-digitGroup js-invisible">
+								<h3>Spacing</h3>
+								<label class="radio-inline js-grouping"><input  class="form-check-input" id="threeDigits" name="digitGroup" value="3" type="radio" checked> 3 Digits</label>
+								<label class="radio-inline js-grouping"><input  class="form-check-input" id="fourDigits" name="digitGroup" value="4" type="radio"> 4 Digits</label>
+							</div>
+							<h3 class='checkbox' for="displayCurrent">Display numbers: </h3>
+							<input  class="form-check-input checkbox" id="displayCurrent" name="displayCurrent" type="checkbox" checked>
+						</fieldset>
+					</form>
+				</div>
+				<button type="button" id="js-clearBtn" class="js-controls js-clearBtn fixedCtrlBtn js-hidden" data-action="clearSessions"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+				<div id="js-displayResult" class='displayResult'>
+				</div>
+			</div>
+			<script>
+				window.onunload = function() {
+  					speechSynthesis.cancel();
+				};
+				window.onload = function() {
+  					speechSynthesis.cancel();
+				}; 
+				document.getElementById('menu-toggle').onclick = function(){alert('Сюда пока не жми!')};
+			</script>
+			<script src="build.js"></script>
+		</body>
+	</html>

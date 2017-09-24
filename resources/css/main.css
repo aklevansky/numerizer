@@ -1,0 +1,244 @@
+html, body {
+	height: 100%;
+	min-width: 700px;
+}
+
+html {
+	font-size: 1vw;
+}
+
+
+body {
+	position: relative;
+	overflow: hidden;
+	font-size: 1rem;
+	line-height: 1.5;
+	min-width: 500px;
+}
+
+button {
+	padding: 0;
+	border: none;
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+    color: black;
+}
+
+/*button:disabled {
+	opacity: 0.3;
+	color: black;
+}
+
+button:disabled:hover {
+	color: black;
+}*/
+
+button.js-controls:hover {
+	color: red;
+}
+
+.fixedCtrlBtn {
+    position: fixed;
+    right: 0;
+	z-index: 100;
+	padding: 1rem;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+    color: black;
+	font-size: 2rem;
+	line-height: 1;
+}
+
+.fixedCtrlBtn:hover {
+	color:red;
+}
+
+#menu-toggle {
+    top: 0;
+}
+
+#menu-toggle:hover {
+	color: red;
+}
+
+#js-clearBtn {
+	top: 14.5vw;
+}
+
+#js-pageControls button {
+	position: relative;
+	margin-top: 0.5rem;
+	padding: 1rem;
+	font-size: 1.5rem;
+	font-weight: bold;
+	line-height: 1;
+	border: 1px solid black;
+	border-radius: 1rem;
+}
+
+#js-pageControls button:hover {
+	border: 1px solid red;
+}
+
+#js-pageControls button:disabled {
+	opacity: 0.3;
+	cursor: not-allowed;
+	border: 1px solid black;
+}
+
+#js-pageControls button:disabled:hover {
+	opacity: 0.3;
+	color: black;
+	cursor: not-allowed;
+}
+
+#js-pageControls > button {
+	margin-right: 2rem;
+}
+
+.js-hidden {
+	display: none !important;
+}
+
+fieldset.js-invisible {
+	max-height: 3rem;
+	overflow: hidden;
+}
+
+.js-invisible {
+	max-height: 0;
+	overflow: hidden;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	width: 96.285vw;
+	background-color: white;
+/*	border-right: 1px solid black;*/
+}
+
+.header {
+	float: left;
+	padding: 1rem;
+/*	border-right: 1px solid black;*/
+/*	border-bottom: 1px solid black;*/
+/*	border-bottom-right-radius: 1rem;
+	border-top-right-radius: 1rem;*/
+	width: 30vw;
+}
+
+.header h1 {
+	position: relative;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	color: black;
+ 	font-family:  "Raleway", "sans-serif";
+  	font-size: 2.5rem;
+  	font-weight:900;
+  	text-align: center;
+  	text-transform: uppercase;
+  	letter-spacing: 2px;
+}
+
+#js-pageControls {
+	float: left;
+	padding: 1rem;
+}
+
+#js-playBtn {
+	margin-top: 1rem;
+}
+
+.setInfoDisplay {
+	position: relative;
+	left: 30vw;
+	top: 6.75vw;
+	padding: 1rem;
+	padding-top: 0;
+/*	border-right: 1px solid black;*/
+	width: 66.285vw;
+}
+
+.setInfo {
+/*	margin-top: 1rem;*/
+	padding: 1rem;
+/*	height: 9.375vw;*/
+	border: 1px solid black;
+	border-radius: 1rem;
+	font-size: 1.1rem;
+}
+
+.setInfo h3 {
+	font-size: 1.1rem;
+	font-weight: bold;
+	display: inline-block;
+	margin-top: 0.5rem;
+	margin-right: 1rem;
+	margin-bottom: 0;
+	min-width: 6rem;
+}
+
+.setInfo h3:first-of-type {
+	margin-top: 0.5rem;
+}
+
+.infoBoxSmall {
+	display: inline-block;
+	width: 25%;
+}
+
+.js-inactive {
+	opacity: 0.2;
+}
+
+.infoLarge {
+	display: inline-block;
+	width: 60%;
+}
+
+.timer {
+	display: inline-block;
+	width: 30%;
+}
+
+.paused {
+    -webkit-animation-name: pausedState;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation-name: pausedState;
+    -moz-animation-duration: 2s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+
+    animation-name: pausedState;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-moz-keyframes pausedState {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes pausedState {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes pausedState {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}

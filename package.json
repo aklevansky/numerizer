@@ -1,0 +1,28 @@
+{
+  "name": "numbertrainer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build": "nodemon --watch webpack.config.js --exec \"webpack --env development\"",
+    "html": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env development\"",
+    "start": "webpack --env production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anton Klevansky",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.7",
+    "html-loader": "^0.5.1",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.6.0"
+  },
+  "dependencies": {
+    "lodash.template": "^4.4.0",
+    "written-number": "^0.6.3"
+  }
+}
