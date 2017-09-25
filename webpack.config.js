@@ -7,6 +7,7 @@ const config = {
     path: path.join(__dirname, 'public'),
     filename: "build.js"
   },
+      devtool: "cheap-inline-module-source-map",
   module: {
     loaders: [{
       test: /\.js?$/,

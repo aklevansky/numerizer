@@ -1,6 +1,3 @@
-import lodashTemplate from 'lodash.template';
-import langSelectTemplate from '../../resources/templates/languageSelectTemplate.html';
-import voicesSelectTemplate from '../../resources/templates/voicesSelectTemplate.html';
 import * as consts from './FormConstants.js';
 import {
 	toggleSpacingField
@@ -16,16 +13,6 @@ export {
 
 const form = document.forms['appForm'];
 
-/* 
-getData()						returns an object with selected language, voice, rate;
-checkSupportedLangs(LANGS)		returns a promise which resolves in an object with supported languages 
-								{'en-US': {name: 'English US', voices: [array of voices names if any]}}
-								'default' property holds the default language
-langDropList(form, selected)	handler for SUPPORTED_LANG promise, creates a drop list with supported langages
-								if only one language is supported, selects it and desables the input field
-voiceDropList(form, lang)		handler for SUPPORTED_LANG promise, creates a drop list with avaialable voices
-*/
-
 // when the language is changed - updated voice list
 // toggle "Spacing" field if needed
 form.elements['lang'].addEventListener("change", (e) => {
@@ -36,14 +23,28 @@ form.elements['lang'].addEventListener("change", (e) => {
 
 form.elements['randomMode'].addEventListener("change", switchRandomMode);
 
-const SUPPORTED_LANGS = checkSupportedLangs(consts.LANGS); // promise
 let supportedVoices = [];
 let randomMode = false;
 
-/* ------------------ */
-langDropList();
-voiceDropList();
-/* -----------------  */
+
+function populateVoiceList() {
+	let voices = speechSynthesis.getVoices();
+
+	if (!voices.length) {
+		return;
+	}
+
+	supportedVoices = voices;
+	langDropList(voices);
+	voiceDropList(form.elements['lang'].value);
+}
+
+
+populateVoiceList();
+if (speechSynthesis.onvoiceschanged !== undefined) {
+	speechSynthesis.onvoiceschanged = populateVoiceList;
+}
+
 
 function getData() {
 	let lang = form.elements['lang'].value;
@@ -53,9 +54,10 @@ function getData() {
 
 	if (!randomMode) {
 
-		for (let i = 0; i < supportedVoices[lang].voices.length; i++) {
-			if (supportedVoices[lang].voices[i].name === voiceName) {
-				voice = supportedVoices[lang].voices[i];
+		for (let i = 0; i < supportedVoices.length; i++) {
+			if (supportedVoices[i].name === voiceName) {
+				voice = supportedVoices[i];
+				break;
 			}
 		}
 
@@ -78,107 +80,64 @@ function getData() {
 	}
 }
 
-function langDropList() {
+function langDropList(voices) {
 
-	let list = form.elements['lang'];
+	let dropElem = form.elements['lang'];
 	let random = form.elements['random'];
-	SUPPORTED_LANGS.then(langObj => {
 
-		let langsCleared = Object.assign({}, langObj);
-		delete langsCleared.default; // so that we can sort the keys unhidered
+	let list = Object.assign({}, consts.LANGS);
+	let elemString = '';
 
-		// create a lang Array and sort it alphabetically
-		let langArr = Object.keys(langsCleared).sort((langOne, langTwo) => {
-			return (langObj[langOne].name > langObj[langTwo].name) ? 1 : -1;
-		});
+	voices.forEach(voice => {
+		if (list[voice.lang]) {
+			elemString += `<option value="${voice.lang}" `;
 
-		let optionsList = lodashTemplate(langSelectTemplate)({
-			order: langArr,
-			langs: langObj,
-			selected: langObj.default
-		});
+			if (voice.lang === consts.LANG_DEFAULT) {
+				elemString += 'selected';
+			}
 
-		list.innerHTML = optionsList;
-		random.innerHTML = optionsList;
-
-		if (langArr.length < 2) {
-			list.disabled = true;
-			form.elements['randomMode'].disabled = true;
+			elemString += `>${list[voice.lang].name}</option>`;
+			delete list[voice.lang];
 		}
 	});
+
+	dropElem.innerHTML = elemString;
+	random.innerHTML = elemString;
+
+	if (voices.length < 2) {
+		list.disabled = true;
+		form.elements['randomMode'].disabled = true;
+	}
 }
 
 /* 	voices for a selected language
 	if there is only one voice, input is blocked
 */
-function voiceDropList(selected) {
+function voiceDropList(lang = 'en-US') {
 	let list = form.elements['voice'];
 
-	SUPPORTED_LANGS.then(langObj => {
+	if (!supportedVoices.length) {
+		return;
+	}
 
-		// for the first call, if the second argument is not specified
-		if (!selected) {
-			selected = langObj.default || Object.keys(langObj)[0];
+	let elemString = '';
+	let counter = 0;
+	supportedVoices.forEach(voice => {
+		if (voice.lang === lang) {
+			elemString += `<option value="${voice.name}">${voice.name}</option>`;
+			counter++;
 		}
-		let voiceList = lodashTemplate(voicesSelectTemplate)({
-			voices: langObj[selected].voices.map(voice => voice.name)
-		});
-
-		list.innerHTML = voiceList;
-
-		if (langObj[selected].voices.length <= 1) {
-			list.disabled = true;
-		} else {
-			list.disabled = false;
-		}
-
 	});
+
+	list.innerHTML = elemString;
+
+	if (counter <= 1) {
+		list.disabled = true;
+	} else {
+		list.disabled = false;
+	}
 }
 
-// returns a promise which resolves in an object with supported languages 
-// {'en-US': {name: 'English US', voices: [array of voices names if any]}}
-function checkSupportedLangs(LANGS) {
-	// adding a droplist of languages
-	// a two-stop procedure is necessary to reconcile Chrome and Firefox
-	return new Promise((resolve) => {
-		let voices = speechSynthesis.getVoices();
-		if (Array.isArray(voices) && voices.length) {
-			resolve(voices);
-		} else {
-			speechSynthesis.onvoiceschanged = (e) => {
-				resolve(speechSynthesis.getVoices());
-			}
-		}
-	}).then(voices => {
-		let supported = {};
-
-		voices.forEach(instance => {
-			if (LANGS.hasOwnProperty(instance.lang)) {
-
-				if (!supported.hasOwnProperty(instance.lang)) {
-					supported[instance.lang] = LANGS[instance.lang];
-					supported[instance.lang].voices = [];
-				}
-
-				// set default language
-				if (instance.default) {
-					supported.default = instance.lang;
-				}
-
-				supported[instance.lang].voices.push(instance);
-
-			}
-		});
-		supportedVoices = supported;
-		return supported;
-
-	}).catch(e => {
-		console.log(supported);
-		return {
-			en: 'English'
-		};
-	});
-}
 
 
 function switchRandomMode(e) {
@@ -199,14 +158,24 @@ function switchRandomMode(e) {
 function randomModeList() {
 	let elem = form.elements['random'];
 
-	let langs = [];
+	// let langs = [];
 	let voices = [];
 
 	for (let child of elem.children) {
 		if (child.selected) {
-			langs = langs.concat(supportedVoices[child.value].voices);
+
+			for (let i = 0; i < supportedVoices.length; i++) {
+				if (supportedVoices[i].lang === child.value) {
+					voices.push(supportedVoices[i]);
+				}
+			}
+
 		}
 	}
 
-	return langs;
+	if (!voices.length) {
+		voices.push(supportedVoices[0]);
+	}
+	
+	return voices;
 }
