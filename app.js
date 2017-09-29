@@ -8,3 +8,4 @@ import main from './resources/css/main.css';
 import form from './resources/css/form.css';
 import numberSet from './resources/css/numberSet.css';
 // import menu from './resources/css/menu.css';
+import welcome from './resources/css/welcome.css'
