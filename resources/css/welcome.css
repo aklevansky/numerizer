@@ -1,0 +1,28 @@
+.welcome {
+	padding: 1rem;
+	border: 1px solid black;
+	border-radius: 1rem;
+}
+
+.welcome h2 {
+	margin: 0;
+	margin-bottom: 1rem;
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.welcome p {
+	margin: 0;
+	margin-bottom: 1rem;
+}
+
+.welcome .shortkeys {
+	margin: 0;
+	margin-bottom: 0.5rem;
+}
+
+.welcome .key {
+	display: inline-block;
+	width: 8rem;
+	font-weight: bold;
+}

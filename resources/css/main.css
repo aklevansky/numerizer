@@ -91,7 +91,7 @@ button.js-controls:hover {
 }
 
 .js-hidden {
-	display: none !important;
+	display: none;
 }
 
 fieldset.js-invisible {
@@ -150,6 +150,25 @@ header {
 
 #js-playBtn {
 	margin-top: 1rem;
+}
+
+#errorMessage {
+	margin-top: 2rem;
+	font-size: 1.5rem;
+	color: red;
+	opacity: 1;
+	-webkit-transition: opacity 1s ease 0s;
+    -moz-transition: opacity 1s ease 0s;
+    -ms-transition: opacity 1s ease 0s;
+    -o-transition: opacity 1s ease 0s;
+    transition: opacity 1s ease 0s;
+}
+
+#errorMessage.js-hidden {
+	display: block;
+	opacity: 0;
+	max-height: 1.5rem;
+
 }
 
 .setInfoDisplay {

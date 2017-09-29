@@ -10,6 +10,12 @@ import {
 	setView,
 	deleteSession
 } from './ViewController';
+import './KeyboardShortcuts';
+
+let currentSession = null;
+
+export {speak, currentSession, createSession};
+
 
 const playBtn = document.getElementById('js-playBtn');
 const pauseBtn = document.getElementById('js-pauseBtn');
@@ -18,7 +24,7 @@ const clearBtn = document.getElementById('js-clearBtn');
 
 const toggleBtn = document.getElementById('menu-toggle');
 
-let currentSession = null;
+
 
 if (playBtn) {
 	playBtn.addEventListener('click', e => createSession());

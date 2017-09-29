@@ -1,7 +1,6 @@
 import {
 	updateCurrentSession,
 } from './ViewController';
-//import writtenNumber from 'written-number';
 import {localizeNum} from '../Commons/helperFunctions';
 
 let Speaker = {

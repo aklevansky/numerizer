@@ -1,5 +1,6 @@
 import './js/Form/Form';
 import './js/Player/Player';
+import './js/Player/Welcome';
 // import './js/Menu/Menu';
 import bootstrap from './resources/css/bootstrap.min.css';
 // import reset from './resources/css/reset.css';

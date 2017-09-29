@@ -154,6 +154,9 @@ function deleteSession(sessionElem) {
 //	sessionElem.parentElement.removeChild(sessionElem);
 	
 	setTimeout( () => {
+		if (!sessionElem.parentElement) {
+			return;
+		}
 		sessionElem.parentElement.removeChild(sessionElem);
 
 			if ( !display.children.length ) {

@@ -51,9 +51,9 @@ const devConfig = () => {
 const productionConfig = () => {
 
   const prod = {
-    // plugins: [
-    //   new UglifyJSPlugin()
-    // ]
+    plugins: [
+      new UglifyJSPlugin()
+    ]
   }
   return Object.assign({}, config, prod);
 }
