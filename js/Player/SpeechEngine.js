@@ -1,7 +1,8 @@
 import {
 	updateCurrentSession,
 } from './ViewController';
-import writtenNumber from 'written-number';
+//import writtenNumber from 'written-number';
+import {localizeNum} from '../Commons/helperFunctions';
 
 let Speaker = {
 	play,
@@ -150,12 +151,9 @@ function createUtterances({
 	let utterances = [];
 	numbers.forEach(number => {
 		let msg = null;
-		if (voice.lang.startsWith('en-') && number >= 1000000) { // English speech synthesis doesn't support long numbers
-			msg = new SpeechSynthesisUtterance(writtenNumber(number));
-		} else {
-			msg = new SpeechSynthesisUtterance(number);
-		}
+		msg = new SpeechSynthesisUtterance(localizeNum(number, voice.lang));
 		msg.voice = voice;
+		msg.lang = voice.lang;
 		msg.rate = +rate;
 		utterances.push(msg);
 	});
@@ -168,12 +166,9 @@ function createUtterancesRandom(numbers, voice, rate) {
 	let utterances = [];
 	numbers.forEach((number, i) => {
 		let msg = null;
-		if (voice[i].lang.startsWith('en-') && number >= 1000000) { // English speech synthesis doesn't support long numbers
-			msg = new SpeechSynthesisUtterance(writtenNumber(number));
-		} else {
-			msg = new SpeechSynthesisUtterance(number);
-		}
+		msg = new SpeechSynthesisUtterance(localizeNum(number, voice[i].lang));
 		msg.voice = voice[i];
+		msg.lang = voice[i].lang;
 		msg.rate = +rate;
 		utterances.push(msg);
 

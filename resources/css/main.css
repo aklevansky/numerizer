@@ -1,6 +1,5 @@
 html, body {
 	height: 100%;
-	min-width: 700px;
 }
 
 html {
@@ -13,7 +12,6 @@ body {
 	overflow: hidden;
 	font-size: 1rem;
 	line-height: 1.5;
-	min-width: 500px;
 }
 
 button {
@@ -25,14 +23,6 @@ button {
     color: black;
 }
 
-/*button:disabled {
-	opacity: 0.3;
-	color: black;
-}
-
-button:disabled:hover {
-	color: black;
-}*/
 
 button.js-controls:hover {
 	color: red;
@@ -58,6 +48,7 @@ button.js-controls:hover {
 
 #menu-toggle {
     top: 0;
+    z-index: 200;
 }
 
 #menu-toggle:hover {
@@ -145,6 +136,11 @@ header {
   	text-align: center;
   	text-transform: uppercase;
   	letter-spacing: 2px;
+  	  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none; 
+  cursor: default;
 }
 
 #js-pageControls {

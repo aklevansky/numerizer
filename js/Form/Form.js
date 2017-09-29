@@ -60,8 +60,10 @@ function getUserInput() {
 	if (voice.random) {
 		voice.voice = createRandomVoiceList(voice.voice, numbers.length);
 	}
+
+	let decimal = ',';
 	return Object.assign({
-		numbers
+		numbers, decimal
 	}, voice, display);
 }
 
@@ -81,13 +83,15 @@ function enableForm() {
 function generateNumberList({
 	min = 1000,
 	max = 1000000,
-	quantity = 100
+	quantity = 100,
+	precision = 0
 }) {
 
 	let numbers = [];
 
 	for (let i = 0; i < quantity; i++) {
-		numbers.push(randomInteger(min, max));
+		numbers.push(randomFloat(min, max, precision));
+//		numbers.push(randomInteger(min, max));
 	}
 
 	return numbers;
@@ -111,4 +115,9 @@ function randomInteger(min, max) {
 	var rand = min - 0.5 + Math.random() * (max - min + 1)
 	rand = Math.round(rand);
 	return rand;
+}
+
+// Random float between
+function randomFloat(minValue,maxValue,precision =0){
+    return parseFloat(Math.min(minValue + (Math.random() * (maxValue - minValue)),maxValue).toFixed(precision));
 }

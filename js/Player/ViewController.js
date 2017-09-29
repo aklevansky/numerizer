@@ -150,10 +150,21 @@ function toggleWrap(session) {
 }
 
 function deleteSession(sessionElem) {
-	sessionElem.parentElement.removeChild(sessionElem);
+	sessionElem.classList.add('fade');
+//	sessionElem.parentElement.removeChild(sessionElem);
+	
+	setTimeout( () => {
+		sessionElem.parentElement.removeChild(sessionElem);
 
-	if ( !display.children.length ) {
+			if ( !display.children.length ) {
 		mainControls.clearAll.classList.add('js-hidden');
 		document.getElementById('setInfo').classList.add('js-inactive');
 	}
+
+	}, 1000);
+
+	// if ( !display.children.length ) {
+	// 	mainControls.clearAll.classList.add('js-hidden');
+	// 	document.getElementById('setInfo').classList.add('js-inactive');
+	// }
 }

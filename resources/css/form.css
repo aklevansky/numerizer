@@ -78,6 +78,14 @@ fieldset {
     border: 1px solid black;
     border-radius: 1rem;
     font-size: 1.3rem;
+    max-height: 500px;
+    overflow-y: hidden;
+
+	-webkit-transition: max-height 1s ease 0s;
+    -moz-transition: max-height 1s ease 0s;
+    -ms-transition: max-height 1s ease 0s;
+    -o-transition: max-height 1s ease 0s;
+    transition: max-height 1s ease 0s;
 }
 
 legend {
@@ -103,8 +111,19 @@ legend:hover {
 
 .pause, .random {
 	display: inline-block;
-	margin-left: 10%;
 	width: 40%;
+}
+
+.random {
+	margin-left: 4.5rem;
+}
+
+.rate {
+	float: left;
+}
+
+.pause {
+	float: right;
 }
 
 .lang {
@@ -121,4 +140,19 @@ h3.checkbox {
 
 h3.randomMode {
 	text-align: left;
+}
+
+.js-multiple {
+	max-height: 500px;
+	overflow-y: hidden;
+
+	-webkit-transition: max-height 0.5s ease 0s;
+    -moz-transition: max-height 0.5s ease 0s;
+    -ms-transition: max-height 0.5s ease 0s;
+    -o-transition: max-height 0.5s ease 0s;
+    transition: max-height 0.5s ease 0s;
+}
+
+.js-multiple.js-invisible {
+	max-height: 0px;
 }

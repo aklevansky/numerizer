@@ -16,6 +16,8 @@ const pauseBtn = document.getElementById('js-pauseBtn');
 const stopBtn = document.getElementById('js-stopBtn');
 const clearBtn = document.getElementById('js-clearBtn');
 
+const toggleBtn = document.getElementById('menu-toggle');
+
 let currentSession = null;
 
 if (playBtn) {
@@ -33,7 +35,9 @@ if (pauseBtn) {
 if (clearBtn) {
 	clearBtn.addEventListener('click', e => {
 		if (currentSession) {
-			speak(currentSession, 'stop').then(() => { document.getElementById('js-displayResult').innerHTML = ''; } );
+			speak(currentSession, 'stop').then(() => {
+				document.getElementById('js-displayResult').innerHTML = '';
+			});
 		} else {
 			document.getElementById('js-displayResult').innerHTML = '';
 		}
@@ -41,6 +45,20 @@ if (clearBtn) {
 		document.getElementById('js-clearBtn').classList.add('js-hidden');
 	});
 }
+
+// pause audio when menu button is clicked
+let resume = false;
+document.addEventListener('menuToggle', (e) => {
+	if (e.detail.open && currentSession && currentSession.status === 'play') {
+		speak(currentSession, 'pause');
+		resume = true;
+	} else {
+		if (currentSession && resume) {
+			speak(currentSession, 'play');
+			resume = false;
+		}
+	}
+});
 
 
 function createSession() {

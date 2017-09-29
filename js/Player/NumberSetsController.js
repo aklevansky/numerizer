@@ -14,7 +14,7 @@ function createSessionElement( data ) {
 
 	numberSetsCounter++
 
-	let numbers = data.numbers.map(num => formatNumber(num, data.separator, data.japStyle));
+	let numbers = data.numbers.map(num => formatNumber(num, data.separator, data.japStyle, data.decimal));
 
 	let sessionHTML = lodashTemplate(numberSetTemplate)( {numberSetsCounter, numbers, rate: data.rate, wrapped: data.wrapped} );
 
@@ -30,6 +30,7 @@ function createSessionElement( data ) {
 	}
 
 	display.insertBefore(session, display.firstChild);
+	session.classList.add('slideDown');
 
 	document.getElementById('setInfo').classList.remove('js-inactive');
 

@@ -94,10 +94,11 @@ function getData() {
 	let min = +form.elements.min.value.split(SEPARATOR).join('');
 	let max = +form.elements.max.value.split(SEPARATOR).join('');
 	let quantity = +form.elements.quantity.value.split(SEPARATOR).join('');
+	let precision = +form.elements.precision.value;
 	let error = ERROR;
 
 	return {
-		min, max, quantity, error
+		min, max, quantity, precision, error
 	}
 }
 

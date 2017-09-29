@@ -17,15 +17,56 @@
 
 .js-session {
 	margin-bottom: 1rem;
-	padding: 1rem;
+/*	padding: 1rem;*/
     border: 1px solid black;
     border-radius: 1rem;
+	max-height: 0;	
+    overflow-x: hidden;
+	opacity: 1;
+}
 
-    opacity: 1;
-	-webkit-transition: all 0.8s linear;
-    -moz-transition: all 0.8s linear;
-    -o-transition: all 0.8s linear;
-    transition: all 0.8s linear;   
+.js-session.fade {
+ /*   -webkit-animation: fade 15s;
+    animation: fade 15s;
+*/    opacity: 0;
+ 	-webkit-transition: opacity 1s linear;
+    -moz-transition: opacity 1s linear;
+    -o-transition: opacity 1s linear;
+    transition: opacity 1s linear;     
+}
+
+ .js-session.slideDown {
+    -webkit-animation: slideDown 15s;
+    animation: slideDown 15s;
+    max-height: 10000px;
+
+ }
+
+
+
+@-webkit-keyframes fade {
+    from {opacity: 1}
+    to {opacity: 0}
+}@keyframes fade {
+    from {opacity: 1}
+    to {opacity: 0}
+}
+
+@-webkit-keyframes slideDown {
+    from {max-height: 0}
+    to {max-height: 10000px}
+}@keyframes slideDown {
+    from {max-height: 0}
+    to {max-height: 10000px}
+}
+
+
+@-webkit-keyframes slideUp {
+    from {max-height: 10000px}
+    to {max-height: 0}
+}@keyframes slideUp {
+    from {max-height: 10000px}
+    to {max-height: 0}
 }
 
 .js-session h2 {
@@ -112,19 +153,11 @@
 	display: none;
 }
 
-/*.js-sessionNumber {
-	float: left;
-}
-*/
-/*.controlPlay {
-	float: left;
-}
-
-.controlWindow {
-	float: right;
-}*/
 
 .heading {
+	padding-top: 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 	line-height: 1.5rem;
 	vertical-align:middle;
 }
@@ -166,8 +199,27 @@
 .js-numberSet {
 	margin-top: 1rem;
 	padding-top: 1rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
 	border-top: 1px solid black;
 	font-size: 1.3rem;
+/*	max-height: 10000px;
+
+	-webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;     */
+}
+
+.numberSetWrapper {
+
+	overflow-y: hidden;
+	max-height: 200rem;
+	padding-bottom: 1rem;
+	-webkit-transition: max-height 1s  ease-in-out;
+    -moz-transition: max-height 1s  ease-in-out;
+    -o-transition: max-height 1s  ease-in-out;
+    transition: max-height 1s  ease-in-out;     
 }
 
 .js-currentSpan {
@@ -199,16 +251,17 @@
     content: "";
 }
 
-.js-wrapped .js-numberSet {
-	padding: 0;
-	margin: 0;
-	border: none;
+.js-wrapped .numberSetWrapper {
+/*	padding: 0;
+	padding-right: 1rem;
+	padding-left: 1rem;
+	border: none;*/
+/*	opacity: 0;*/
 	max-height: 0;
-	overflow-y: hidden;
-	-webkit-transition: all 0.8s linear;
-    -moz-transition: all 0.8s linear;
-    -o-transition: all 0.8s linear;
-    transition: all 0.8s linear;     
+	-webkit-transition: all 1s cubic-bezier(0, 1, 0, 1);;
+    -moz-transition: all 1s cubic-bezier(0, 1, 0, 1);;
+    -o-transition: all 1s cubic-bezier(0, 1, 0, 1);;
+    transition: all 1s cubic-bezier(0, 1, 0, 1);;     
 }
 
 .rateCaption {
