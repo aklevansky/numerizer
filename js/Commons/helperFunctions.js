@@ -13,7 +13,8 @@ function localizeNum(num, lang = 'en-US') {
 	if (lang.startsWith('es') && !Number.isInteger(num)) {
 		let decimalPart = getDecimal(num);
 		decimalPart = getSpanishDecimal(decimalPart);
-		let intPart = writtenNumber(Math.floor(num), { lang: 'es' });
+		num = ( num >= 0 ) ? Math.floor(num): Math.ceil(num);
+		let intPart = writtenNumber(num, { lang: 'es' });
 		let numStr = intPart + ' coma ' + decimalPart;
 	
 		return numStr;
@@ -57,13 +58,15 @@ function formatNumber(num, separator = ' ', japStyle = false, decimal = ',') {
 	decimal = (separator === ',') ? '.' : ',';
 	let decimalPart = getDecimal(num);
 
-	let int = formatInteger(Math.floor(num), separator, japStyle)
+	num = ( num >= 0 ) ? Math.floor(num): Math.ceil(num);
+
+	let intStr = formatInteger(Math.floor(num), separator, japStyle)
 
 	if (+decimalPart === 0) {
-		return int;
+		return intStr;
 	}
 
-	return int + decimal + decimalPart
+	return intStr + decimal + decimalPart
 }
 
 

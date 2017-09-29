@@ -35,6 +35,11 @@ document.addEventListener('keydown', e => {
 });
 
 document.addEventListener('keypress', e => {
+
+	if (e.target.tagName === 'INPUT') {
+		return;
+	}
+
 	let key = +e.key;
 
 	if (!isNaN(key)) {
